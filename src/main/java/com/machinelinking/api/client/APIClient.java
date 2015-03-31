@@ -38,7 +38,7 @@ import java.util.Map;
  */
 public class APIClient {
 
-    private static final String DEFAULT_SERVICE_URL = "http://api.machinelinking.com";
+    private static final String DEFAULT_SERVICE_URL = "http://worker04.hzn.redlink.io:8080";
 
     private static final int DEFAULT_CONN_TIMEOUT = 60 * 1000;
 
@@ -142,6 +142,7 @@ public class APIClient {
             properties.put(ParamsValidator.app_key, appKey);
             StringBuilder data = ParamsValidator.getInstance().buildRequest(group, properties);
             httpURLConnection.addRequestProperty("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+            httpURLConnection.addRequestProperty("Acccept", "application/json; charset=UTF-8");
 
             DataOutputStream dataOutputStream = new DataOutputStream(
                     httpURLConnection.getOutputStream());
@@ -296,7 +297,7 @@ public class APIClient {
     private JSONObject parseAndCheckErrors(InputStream is) throws IOException, APIClientException {
         final JSONObject jsonResponse;
         try {
-            jsonResponse = new JSONObject(IOUtils.toString(is));
+            jsonResponse = new JSONObject(IOUtils.toString(is, "UTF-8"));
         } catch (JSONException jsone) {
             throw new APIClientException("An error occurred while parsing the API response.", jsone);
         }
