@@ -38,7 +38,7 @@ import java.util.Map;
  */
 public class APIClient {
 
-    private static final String DEFAULT_SERVICE_URL = "http://api.machinelinking.com";
+    private static final String DEFAULT_SERVICE_URL = "http://worker04.hzn.redlink.io:8080";
 
     private static final int DEFAULT_CONN_TIMEOUT = 60 * 1000;
 
